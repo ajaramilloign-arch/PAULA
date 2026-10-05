@@ -1,0 +1,514 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Nuestros juegos</title><style>
+:root{--bg:#fff5f7;--card:#fff;--ink:#3a2a31;--mut:#8b7480;--line:#f3d9e1;--a:#3b82f6;--p:#ff5c8a;--ok:#22a06b;--no:#d6455d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1519;--card:#2a1f25;--ink:#f7e8ee;--mut:#b79aa7;--line:#43323b}}
+:root[data-theme="dark"]{--bg:#1d1519;--card:#2a1f25;--ink:#f7e8ee;--mut:#b79aa7;--line:#43323b}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;padding:14px 12px 28px}
+h1{margin:4px 0 10px;font-size:1.45rem;text-align:center}.wrap{width:min(94vw,480px)}
+.score{display:flex;gap:10px;margin-bottom:12px}
+.pl{flex:1;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:8px;text-align:center}
+.pl b{display:block;font-size:1.7rem;line-height:1.1}.pl span{font-size:.8rem;color:var(--mut)}
+.pl.a{border-color:var(--a)}.pl.a b{color:var(--a)}.pl.p{border-color:var(--p)}.pl.p b{color:var(--p)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 6px 20px rgba(255,92,138,.1);margin-bottom:10px}
+.mut{color:var(--mut);text-align:center;padding:10px 0}.big{font-size:1.25rem;font-weight:800;text-align:center;margin:4px 0 10px}
+button{font:inherit}button.go{font-weight:800;border:0;border-radius:999px;padding:10px 18px;background:var(--ink);color:var(--bg);cursor:pointer;margin:8px 4px 0}
+button.go:disabled{opacity:.35}.note{color:var(--mut);font-size:.8rem;text-align:center;margin-top:10px}
+.ta{width:100%;font:inherit;border:2px solid var(--line);border-radius:12px;padding:10px;background:var(--bg);color:var(--ink)}
+.a-t{color:var(--a);font-weight:800}.p-t{color:var(--p);font-weight:800}
+.gm-sopa .sub{color:var(--mut);font-size:.9rem;margin-bottom:12px;text-align:center}.gm-sopa .score{display:flex;gap:10px;width:min(94vw,480px);margin-bottom:12px}.gm-sopa .pl{flex:1;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:8px 10px;text-align:center}.gm-sopa .pl b{display:block;font-size:1.8rem;line-height:1.1}.gm-sopa .pl span{font-size:.8rem;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}.gm-sopa .pl.a{border-color:var(--a)}.gm-sopa .pl.a b{color:var(--a)}.gm-sopa .pl.p{border-color:var(--p)}.gm-sopa .pl.p b{color:var(--p)}.gm-sopa .pl.lead{box-shadow:0 0 0 3px var(--sel)}.gm-sopa #grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;width:min(94vw,480px);aspect-ratio:1;background:var(--card);padding:8px;border-radius:18px;border:2px solid var(--line);touch-action:none}.gm-sopa .c{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:clamp(.8rem,4.2vw,1.35rem);border-radius:8px;cursor:pointer}.gm-sopa .c.sel{background:var(--sel);transform:scale(1.08)}.gm-sopa .c.a{background:var(--a);color:#fff}.gm-sopa .c.p{background:var(--p);color:#fff}.gm-sopa #words{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;width:min(94vw,480px);margin:14px 0 8px}.gm-sopa .w{padding:5px 11px;border-radius:999px;background:var(--card);border:2px solid var(--line);font-weight:700;font-size:.85rem}.gm-sopa .w.a{background:var(--a);border-color:var(--a);color:#fff;text-decoration:line-through}.gm-sopa .w.p{background:var(--p);border-color:var(--p);color:#fff;text-decoration:line-through}.gm-sopa #msg{min-height:1.4em;margin:6px 0;font-weight:700;text-align:center}.gm-sopa{--sel:#ffd166;user-select:none;-webkit-user-select:none}.gm-qtm .prog{color:var(--mut);font-size:.8rem;margin-bottom:6px}.gm-qtm .q{font-size:1.2rem;font-weight:800;margin:0 0 10px}.gm-qtm .lab{font-size:.85rem;font-weight:800;color:var(--mut);margin:12px 0 6px}.gm-qtm .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.gm-qtm .o{font:inherit;font-weight:700;padding:10px 6px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}.gm-qtm .o.on{color:#fff}.gm-qtm .me-a .o.on{background:var(--a);border-color:var(--a)}.gm-qtm .me-p .o.on{background:var(--p);border-color:var(--p)}.gm-qtm button.go{width:100%;margin:14px 0 0}.gm-qtm .row{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--line)}.gm-qtm .ok{color:var(--ok);font-weight:800}.gm-qtm .no{color:var(--no);font-weight:800}.gm-ttt .bd{display:grid;gap:5px;background:var(--line);padding:6px;border-radius:14px}.gm-ttt .cl{aspect-ratio:1;border:0;border-radius:50%;background:var(--card);font-size:0;cursor:pointer}.gm-ttt .cl.a{background:var(--a)}.gm-ttt .cl.p{background:var(--p)}.gm-ttt .md button{margin:4px 2px 0;padding:8px 14px;font-size:.85rem}.gm-mem .gd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.gm-mem .mc{aspect-ratio:1;border:3px solid var(--line);border-radius:14px;background:var(--ink);color:var(--bg);font-size:1.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center}.gm-mem .mc.up{background:var(--card);color:inherit}.gm-mem .mc.a{border-color:var(--a);background:var(--card)}.gm-mem .mc.p{border-color:var(--p);background:var(--card)}.gm-draw #cv{width:100%;aspect-ratio:1;background:#fff;border-radius:14px;border:2px solid var(--line);touch-action:none;display:block}.gm-draw .cols{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:8px}.gm-draw .dot{width:30px;height:30px;border-radius:50%;border:3px solid var(--line);cursor:pointer}.gm-draw .dot.on{border-color:var(--ink)}.gm-sud .sd{display:grid;grid-template-columns:repeat(9,1fr);background:var(--ink);gap:1px;border:3px solid var(--ink);border-radius:8px;overflow:hidden}.gm-sud .sc{aspect-ratio:1;border:0;background:var(--card);color:var(--ink);font-size:clamp(.9rem,4.5vw,1.4rem);font-weight:800;padding:0;cursor:pointer}.gm-sud .sc.g{background:var(--line)}.gm-sud .sc.a{color:var(--a)}.gm-sud .sc.p{color:var(--p)}.gm-sud .sc.sel{outline:3px solid #ffd166;outline-offset:-3px}.gm-sud .sc:nth-child(9n+3),.gm-sud .sc:nth-child(9n+6){border-right:2px solid var(--ink)}.gm-sud .sc:nth-child(n+19):nth-child(-n+27),.gm-sud .sc:nth-child(n+46):nth-child(-n+54){border-bottom:2px solid var(--ink)}.gm-sud .np{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin-top:10px}.gm-sud .np button{padding:10px 0;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-weight:800}.gm-cart .ct{border-left:5px solid var(--line);padding:8px 12px;margin:10px 0;border-radius:8px;background:var(--bg);white-space:pre-wrap}.gm-cart .ct.a{border-color:var(--a)}.gm-cart .ct.p{border-color:var(--p)}.gm-cart .ct small{display:block;color:var(--mut);margin-bottom:4px}.gm-preg .qq{font-size:1.2rem;font-weight:800;text-align:center;margin:6px 0 12px}.gm-preg .ans{padding:10px;border-radius:12px;margin:8px 0;background:var(--bg);border-left:5px solid var(--line);white-space:pre-wrap}.gm-preg .ans.a{border-color:var(--a)}.gm-preg .ans.p{border-color:var(--p)}
+.gm,#hub{width:100%;flex-direction:column;align-items:center}.gm:not([hidden]),#hub:not([hidden]){display:flex}
+.gm[hidden],#hub[hidden]{display:none}
+.back{align-self:flex-start;margin:0 0 4px!important;padding:7px 14px!important;font-size:.85rem}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(94vw,520px)}
+.t{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:16px 10px;background:var(--card);border:2px solid var(--line);border-radius:18px;color:var(--ink);cursor:pointer;box-shadow:0 6px 18px rgba(255,92,138,.12)}
+.t .e{font-size:2.2rem}.t small{color:var(--mut)}.sb{color:var(--mut);text-align:center;margin-bottom:16px}
+#lobby{display:flex;flex-direction:column;align-items:center;width:100%}#lobby[hidden]{display:none}</style></head><body><div id="lobby"><h1>💙 Nuestros juegos 💗</h1><div class="sb">Para jugar juntos, uno crea la sala y el otro entra con el código</div>
+<div class="card" style="width:min(94vw,420px)"><div class="big">Andrés: crea la sala</div><div style="text-align:center"><button class="go" id="mk">Crear sala 💙</button></div></div>
+<div class="card" style="width:min(94vw,420px)"><div class="big">Paula: únete</div><input class="ta" id="cd" placeholder="Código de la sala" maxlength="4" style="text-transform:uppercase;text-align:center;font-size:1.3rem"><div style="text-align:center"><button class="go" id="jn">Unirme 💗</button></div></div>
+<div class="note" id="ls"></div></div><div id="hub" hidden><h1>💙 Nuestros juegos 💗</h1><div class="sb">Andrés y Paula, a distancia pero juntos</div><div class="sb" id="roomst"></div><div class="hg"><button class="t" data-g="sopa"><span class="e">💕</span><b>Sopa de Letras</b><small>Encuentren más palabras que el otro</small></button><button class="t" data-g="qtm"><span class="e">💞</span><b>¿Qué tanto me conoces?</b><small>Adivinen cómo es el otro</small></button><button class="t" data-g="ttt"><span class="e">⭕</span><b>Tres en raya y Conecta 4</b><small>Por turnos, con marcador</small></button><button class="t" data-g="mem"><span class="e">🃏</span><b>Memoria de parejas</b><small>Encuentren más pares</small></button><button class="t" data-g="draw"><span class="e">🎨</span><b>Dibuja y adivina</b><small>Uno dibuja, el otro adivina</small></button><button class="t" data-g="sud"><span class="e">🔢</span><b>Sudoku en pareja</b><small>Resuelvan juntos el mismo tablero</small></button><button class="t" data-g="cart"><span class="e">💌</span><b>Cartas para ti</b><small>Cartas que se abren el día que elijas</small></button><button class="t" data-g="preg"><span class="e">🗝️</span><b>Preguntas de pareja</b><small>Respondan y descubran juntos</small></button></div></div><div class="gm gm-sopa" id="gm-sopa" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>💕 Sopa de Letras</h1><div class="sub">Arrastra el dedo sobre las letras. ¡Gana quien encuentre más palabras!</div><div class="score"><div class="pl a" id="p1"><span>Andrés</span><b>0</b></div><div class="pl p" id="p2"><span>Paula</span><b>0</b></div></div><div id="grid"></div><div id="msg"></div><div id="words"></div><button class="go" id="new">Nueva sopa 🔄</button><div class="note" id="note"></div></div></div><div class="gm gm-qtm" id="gm-qtm" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>💞 ¿Qué tanto me conoces?</h1><div class="score"><div class="pl a"><span id="na">Andrés</span><b id="sa">0</b></div><div class="pl p"><span id="np">Paula</span><b id="sp">0</b></div></div><div id="main"></div><div class="note" id="note"></div></div></div><div class="gm gm-ttt" id="gm-ttt" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>⭕ Tres en raya y Conecta 4</h1><div class="score"><div class="pl a"><span id="na">Andrés</span><b id="sa">0</b></div><div class="pl p"><span id="np">Paula</span><b id="sp">0</b></div></div><div id="main"></div><div class="note" id="note"></div></div></div><div class="gm gm-mem" id="gm-mem" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>🃏 Memoria de parejas</h1><div class="score"><div class="pl a"><span id="na">Andrés</span><b id="sa">0</b></div><div class="pl p"><span id="np">Paula</span><b id="sp">0</b></div></div><div id="main"></div><div class="note" id="note"></div></div></div><div class="gm gm-draw" id="gm-draw" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>🎨 Dibuja y adivina</h1><div class="score"><div class="pl a"><span id="na">Andrés</span><b id="sa">0</b></div><div class="pl p"><span id="np">Paula</span><b id="sp">0</b></div></div><div id="main"></div><div class="note" id="note"></div></div></div><div class="gm gm-sud" id="gm-sud" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>🔢 Sudoku en pareja</h1><div class="score"><div class="pl a"><span id="na">Andrés</span><b id="sa">0</b></div><div class="pl p"><span id="np">Paula</span><b id="sp">0</b></div></div><div id="main"></div><div class="note" id="note"></div></div></div><div class="gm gm-cart" id="gm-cart" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>💌 Cartas para ti</h1><div id="main"></div><div class="note" id="note"></div></div></div><div class="gm gm-preg" id="gm-preg" hidden><div class="wrap" style="display:flex;flex-direction:column;align-items:center"><button class="go back" data-back>← Menú</button><h1>🗝️ Preguntas de pareja</h1><div id="main"></div><div class="note" id="note"></div></div></div><script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script><script>
+const NJ={store:{},ls:[],conn:null,role:"a",code:"",n:0,peer:null,up:false};
+const $$=id=>document.getElementById(id);
+function nsave(){try{localStorage.setItem("nj-"+NJ.code,JSON.stringify(NJ.store))}catch(e){}}
+function nload(){try{NJ.store=JSON.parse(localStorage.getItem("nj-"+NJ.code)||"{}")}catch(e){NJ.store={}}}
+function fire(p){NJ.ls.forEach(l=>l.match(p)&&setTimeout(l.run,0))}
+function apply(p,d,t){const o=NJ.store[p];if(o&&o.t>=t)return;NJ.store[p]={d,t};nsave();fire(p)}
+function snd(m){if(NJ.conn&&NJ.conn.open)NJ.conn.send(m)}
+const sdoc=p=>({id:p.split("/").pop(),exists:!!(NJ.store[p]&&NJ.store[p].d),data:()=>NJ.store[p]?NJ.store[p].d:undefined});
+const dbA={
+ doc(p){return{id:p.split("/").pop(),path:p,get:async()=>sdoc(p),
+  set:async d=>{const t=Date.now()+(NJ.n=(NJ.n+1)%1000)/1000;apply(p,d,t);snd({k:"w",p,d,t})},
+  update:async d=>{const t=Date.now()+(NJ.n=(NJ.n+1)%1000)/1000,m={...(NJ.store[p]&&NJ.store[p].d||{}),...d};apply(p,m,t);snd({k:"w",p,d:m,t})},
+  onSnapshot(cb){const l={match:q=>q===p,run:()=>cb(sdoc(p))};NJ.ls.push(l);setTimeout(l.run,0);return()=>{NJ.ls=NJ.ls.filter(x=>x!==l)}}}},
+ collection(path){const pre=path+"/";return{doc:id=>dbA.doc(pre+id),
+  onSnapshot(cb){const mk=()=>{const docs=Object.keys(NJ.store).filter(k=>k.startsWith(pre)&&!k.slice(pre.length).includes("/")&&NJ.store[k].d).map(sdoc);return{docs,size:docs.length,empty:!docs.length}};
+   const l={match:q=>q.startsWith(pre),run:()=>cb(mk())};NJ.ls.push(l);setTimeout(l.run,0);return()=>{NJ.ls=NJ.ls.filter(x=>x!==l)}}}}};
+const userA={me:async()=>({id:NJ.role,name:NJ.role==="a"?"Andrés":"Paula",isOwner:NJ.role==="a"}),id:async()=>NJ.role,profiles:async()=>({})};
+function status(t){const e=$$("roomst");if(e)e.textContent=t}
+function ready(){if(NJ.up)return;NJ.up=true;window.claude={use:async n=>n==="db"?dbA:n==="user"?userA:null};
+ $$("lobby").hidden=true;$$("hub").hidden=false;status("Sala "+NJ.code)}
+function wire(c){NJ.conn=c;
+ c.on("open",()=>{c.send({k:"all",s:NJ.store});status("Sala "+NJ.code+" · 🟢 Conectados");ready()});
+ c.on("data",m=>{if(m.k==="all")Object.keys(m.s).forEach(p=>apply(p,m.s[p].d,m.s[p].t));else if(m.k==="w")apply(m.p,m.d,m.t)});
+ c.on("close",()=>{status("Sala "+NJ.code+" · 🔴 Sin conexión con "+(NJ.role==="a"?"Paula":"Andrés"));if(NJ.role==="p")setTimeout(join,2500)});}
+function join(){wire(NJ.peer.connect("nj-"+NJ.code,{reliable:true}))}
+function lmsg(t){$$("ls").textContent=t}
+$$("mk").onclick=()=>{
+ let code=localStorage.getItem("nj-last")||Array.from({length:4},()=>"ABCDEFGHJKMNPQRSTUVWXYZ"[Math.floor(Math.random()*23)]).join("");
+ NJ.role="a";NJ.code=code;try{localStorage.setItem("nj-last",code)}catch(e){}nload();lmsg("Creando sala…");
+ NJ.peer=new Peer("nj-"+code);
+ NJ.peer.on("open",()=>{ready();status("Sala "+code+" · dile a Paula este código · esperando…")});
+ NJ.peer.on("connection",wire);
+ NJ.peer.on("error",e=>lmsg(e.type==="unavailable-id"?"La sala sigue activa. Espera unos segundos y recarga.":"Error de conexión: "+e.type));
+};
+$$("jn").onclick=()=>{
+ const code=$$("cd").value.trim().toUpperCase();if(code.length<4){lmsg("Escribe el código de 4 letras");return}
+ NJ.role="p";NJ.code=code;nload();lmsg("Conectando con Andrés…");
+ NJ.peer=new Peer();NJ.peer.on("open",join);
+ NJ.peer.on("error",e=>lmsg(e.type==="peer-unavailable"?"No encuentro esa sala. Revisa el código y que Andrés la haya creado.":"Error de conexión: "+e.type));
+};
+</script><script>function G_sopa(root){
+const WORDS=["AMOR","BESO","ABRAZO","CORAZON","SONRISA","LUNA","ESTRELLA","TERNURA","PASION","DESTINO","ILUSION","CIELO","VIAJE","MIRADA","CARICIA","DETALLE","SUSURRO","FUTURO","JUNTOS","CITA","FLORES","MAGIA","NOSOTROS","CANCION"];
+const N=12,DIRS=[[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function build(seed){
+  const r=rng(seed),pool=[...WORDS];
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+  const g=Array.from({length:N},()=>Array(N).fill("")),placed=[];
+  for(const w of pool.slice(0,10).sort((a,b)=>b.length-a.length)){
+    for(let t=0;t<300;t++){
+      const [dr,dc]=DIRS[Math.floor(r()*8)],r0=Math.floor(r()*N),c0=Math.floor(r()*N);
+      const r1=r0+dr*(w.length-1),c1=c0+dc*(w.length-1);
+      if(r1<0||r1>=N||c1<0||c1>=N)continue;
+      let ok=true;for(let i=0;i<w.length;i++){const ch=g[r0+dr*i][c0+dc*i];if(ch&&ch!==w[i]){ok=false;break}}
+      if(!ok)continue;
+      const cells=[];for(let i=0;i<w.length;i++){g[r0+dr*i][c0+dc*i]=w[i];cells.push([r0+dr*i,c0+dc*i])}
+      placed.push({w,cells});break;
+    }
+  }
+  const L="ABCDEFGHIJLMNOPRSTUVZ";
+  for(let i=0;i<N;i++)for(let j=0;j<N;j++)if(!g[i][j])g[i][j]=L[Math.floor(r()*L.length)];
+  return{g,placed};
+}
+let seed=1,puz=build(1),found={},roles={},myId="local",myRole="a",db=null,user=null;
+const $=id=>root.querySelector("#"+id),grid=$("grid");
+const cls=by=>roles[by]||(by===myId?myRole:(myRole==="a"?"p":"a"));
+function render(){
+  grid.innerHTML="";
+  const col={};
+  for(const p of puz.placed){const by=found[p.w];if(by)p.cells.forEach(([r,c])=>col[r+"_"+c]=cls(by))}
+  puz.g.forEach((row,r)=>row.forEach((ch,c)=>{
+    const d=document.createElement("div");d.className="c "+(col[r+"_"+c]||"");d.dataset.r=r;d.dataset.c=c;d.textContent=ch;grid.appendChild(d)}));
+  $("words").innerHTML=puz.placed.map(p=>`<span class="w ${found[p.w]?cls(found[p.w]):""}">${p.w}</span>`).join("");
+  const vals=Object.values(found).map(cls),na=vals.filter(x=>x==="a").length,np=vals.filter(x=>x==="p").length;
+  $("p1").querySelector("b").textContent=na;$("p2").querySelector("b").textContent=np;
+  $("p1").querySelector("span").textContent="Andrés"+(myRole==="a"?" (tú)":"");
+  $("p2").querySelector("span").textContent="Paula"+(myRole==="p"?" (tú)":"");
+  $("p1").classList.toggle("lead",na>np);$("p2").classList.toggle("lead",np>na);
+  const mine=myRole==="a"?na:np,her=myRole==="a"?np:na;
+  const done=Object.keys(found).length>=puz.placed.length;
+  $("msg").textContent=done?(mine>her?"🎉 ¡Ganaste esta sopa!":mine<her?"💖 ¡Ella ganó esta vez!":"💞 ¡Empate!"):"";
+}
+let sel=[],start=null,drag=false;
+function cellAt(x,y){const e=document.elementFromPoint(x,y);return e&&e.classList.contains("c")?[+e.dataset.r,+e.dataset.c]:null}
+function line(a,b){
+  const dr=b[0]-a[0],dc=b[1]-a[1];
+  if(dr&&dc&&Math.abs(dr)!==Math.abs(dc))return null;
+  const n=Math.max(Math.abs(dr),Math.abs(dc)),sr=Math.sign(dr),sc=Math.sign(dc),out=[];
+  for(let i=0;i<=n;i++)out.push([a[0]+sr*i,a[1]+sc*i]);return out;
+}
+function mark(){[...grid.children].forEach(e=>e.classList.remove("sel"));sel.forEach(([r,c])=>grid.children[r*N+c].classList.add("sel"))}
+grid.addEventListener("pointerdown",e=>{const c=cellAt(e.clientX,e.clientY);if(!c)return;e.preventDefault();drag=true;start=c;sel=[c];mark()});
+grid.addEventListener("pointermove",e=>{if(!drag)return;const c=cellAt(e.clientX,e.clientY);if(!c)return;const l=line(start,c);if(l){sel=l;mark()}});
+window.addEventListener("pointerup",async()=>{
+  if(!drag)return;drag=false;
+  const s=sel.map(([r,c])=>puz.g[r][c]).join(""),rv=[...s].reverse().join("");
+  const hit=puz.placed.find(p=>!found[p.w]&&(p.w===s||p.w===rv));
+  sel=[];mark();
+  if(hit)await claim(hit.w);
+});
+async function claim(w){
+  if(db){
+    try{
+      const ref=db.collection("found").doc(seed+"_"+w),s=await ref.get();
+      if(s.exists)return;
+      found[w]=myId;render();
+      await ref.set({seed,word:w,by:myId});
+    }catch(e){$("msg").textContent="No se pudo guardar tu palabra 😕"}
+  }else{found[w]=myId;render()}
+}
+let raw=[];
+function recompute(){found={};raw.forEach(x=>{if(x&&x.seed===seed)found[x.word]=x.by});render();refreshNames()}
+async function newGame(){
+  const s=Math.floor(Math.random()*1e9);
+  if(db){try{await db.doc("game/state").set({seed:s})}catch(e){$("msg").textContent="No tienes permiso para crear una nueva sopa."}}
+  else{seed=s;puz=build(s);found={};render()}
+}
+$("new").onclick=newGame;
+function refreshNames(){}
+render();
+(async()=>{
+  try{
+    if(!window.claude){$("note").textContent="Modo solitario: abre el enlace compartido para jugar en pareja.";return}
+    db=await claude.use("db");user=await claude.use("user");
+    if(!db||!user){db=null;$("note").textContent="Modo solitario: inicia sesión para jugar en pareja.";return}
+    const me=await user.me();myId=await user.id()||me.id||"yo";myRole=me.isOwner?"a":"p";
+    db.doc("players/"+myId).set({t:Date.now(),r:myRole}).catch(()=>{});
+    db.collection("players").onSnapshot(s=>{roles={};s.docs.forEach(d=>{const x=d.data();if(x&&x.r)roles[d.id]=x.r});render()});
+    db.doc("game/state").onSnapshot(s=>{
+      const d=s.exists&&s.data();const ns=d&&d.seed?d.seed:1;
+      seed=ns;puz=build(seed);recompute();
+    });
+    db.collection("found").onSnapshot(s=>{
+      raw=s.docs.map(d=>d.data());recompute();
+    });
+    $("note").textContent="Conectado ✨ Los avances se ven en tiempo real en ambos dispositivos.";
+  }catch(e){db=null;$("note").textContent="Modo solitario (sin conexión)."}
+})();
+
+}
+function G_qtm(root){
+const BANK=[
+["Mi comida favorita",["Pizza","Hamburguesa","Pasta","Pollo"]],
+["Mi clima favorito",["Calor","Frío","Lluvia","Templado"]],
+["Mi plan ideal",["Película en casa","Salir a comer","Caminar al aire libre","Viajar"]],
+["Prefiero",["Las mañanas","Las noches"]],
+["Mi superpoder soñado",["Volar","Invisibilidad","Leer mentes","Viajar en el tiempo"]],
+["Mi mayor miedo",["Las alturas","Los insectos","La soledad","La oscuridad"]],
+["Mi postre preferido",["Helado","Chocolate","Torta","Frutas"]],
+["Mi género de película",["Romance","Comedia","Terror","Acción"]],
+["Mi viaje soñado",["Playa","Montaña","Ciudad","Campo"]],
+["Mi bebida favorita",["Café","Jugo","Gaseosa","Agua"]],
+["Para relajarme",["Música","Dormir","Series","Ejercicio"]],
+["Soy más",["Planeado","Espontáneo"]],
+["Mi mascota ideal",["Perro","Gato","Ninguna","Otra"]],
+["Mi regalo ideal",["Algo hecho a mano","Una salida","Tecnología","Una carta"]]];
+const T=10;
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function pick(seed){const r=rng(seed),p=BANK.map((_,i)=>i);for(let i=p.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[p[i],p[j]]=[p[j],p[i]]}return p.slice(0,T)}
+const $=id=>root.querySelector("#"+id),NAME={a:"Andrés",p:"Paula"};
+let db=null,seed=1,order=pick(1),raw=[],myRole="a",ack=0,init=false,sOwn=null,sGuess=null;
+const other=()=>myRole==="a"?"p":"a";
+const get=(q,role)=>raw.find(x=>x.seed===seed&&x.q===q&&x.role===role);
+function scores(){let s={a:0,p:0};for(let q=0;q<T;q++){const A=get(q,"a"),P=get(q,"p");if(A&&P){if(A.guess===P.own)s.a++;if(P.guess===A.own)s.p++}}return s}
+function render(){
+  const s=scores();$("sa").textContent=s.a;$("sp").textContent=s.p;
+  $("na").textContent="Andrés"+(myRole==="a"?" (tú)":"");$("np").textContent="Paula"+(myRole==="p"?" (tú)":"");
+  const m=$("main"),q=ack,o=other();
+  if(q>=T){
+    const w=s.a===s.p?"💞 ¡Empate! Se conocen igual de bien":(s.a>s.p?"💙 Andrés conoce mejor":"💗 Paula conoce mejor");
+    m.innerHTML=`<div class="card"><div class="big">${w}</div><div class="mut">Andrés ${s.a} · Paula ${s.p}</div><button class="go" id="again">Jugar otra ronda 🔄</button></div>`;
+    $("again").onclick=newGame;return;
+  }
+  const [txt,opts]=BANK[order[q]],mine=get(q,myRole),theirs=get(q,o);
+  const hd=`<div class="prog">Pregunta ${q+1} de ${T}</div><p class="q">${txt}…</p>`;
+  if(mine&&theirs){
+    const rows=["a","p"].map(r=>{const d=get(q,r),t=get(q,r==="a"?"p":"a"),hit=d.guess===t.own;
+      return `<div class="row"><span><b>${NAME[r]}</b> dijo: ${opts[d.own]}<br><small>y creía que ${NAME[r==="a"?"p":"a"]} elegiría: ${opts[d.guess]}</small></span><span class="${hit?"ok":"no"}">${hit?"+1 ✔":"✘"}</span></div>`}).join("");
+    m.innerHTML=`<div class="card">${hd}${rows}<button class="go" id="next">${q+1>=T?"Ver resultado":"Siguiente"}</button></div>`;
+    $("next").onclick=()=>{ack++;sOwn=sGuess=null;render()};return;
+  }
+  if(mine){m.innerHTML=`<div class="card">${hd}<div class="mut">Respuesta enviada 💌<br>Esperando a ${NAME[o]}…</div></div>`;return}
+  const btn=(arr,sel,k)=>arr.map((t,i)=>`<button class="o ${sel===i?"on":""}" data-k="${k}" data-i="${i}">${t}</button>`).join("");
+  m.innerHTML=`<div class="card me-${myRole}">${hd}<div class="lab">Tú (${NAME[myRole]}) ¿qué eres?</div><div class="opts">${btn(opts,sOwn,"own")}</div>
+  <div class="lab">¿Qué crees que eligió ${NAME[o]}?</div><div class="opts">${btn(opts,sGuess,"guess")}</div>
+  <button class="go" id="send" ${sOwn!=null&&sGuess!=null?"":"disabled"}>Enviar 💌</button></div>`;
+  m.querySelectorAll(".o").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(b.dataset.k==="own")sOwn=i;else sGuess=i;render()});
+  $("send").onclick=async()=>{
+    if(!db)return;$("send").disabled=true;
+    try{const d={seed,q,role:myRole,own:sOwn,guess:sGuess};await db.doc("qtm/"+seed+"_"+q+"_"+myRole).set(d);raw.push(d);sOwn=sGuess=null;render()}
+    catch(e){$("note").textContent="No se pudo enviar. Revisa tu permiso de Colaborador.";$("send").disabled=false}
+  };
+}
+async function newGame(){
+  try{await db.doc("qtmgame/state").set({seed:Math.floor(Math.random()*1e9)})}catch(e){$("note").textContent="No tienes permiso para iniciar otra ronda."}
+}
+function firstUnfinished(){let q=0;while(q<T&&get(q,"a")&&get(q,"p"))q++;return q}
+render();
+(async()=>{
+  try{
+    if(!window.claude){$("note").textContent="Abre el enlace compartido para jugar en pareja.";return}
+    db=await claude.use("db");const user=await claude.use("user");
+    if(!db||!user){db=null;$("note").textContent="Inicia sesión para jugar en pareja.";return}
+    myRole=(await user.me()).isOwner?"a":"p";
+    db.doc("qtmgame/state").onSnapshot(s=>{
+      const ns=s.exists&&s.data()&&s.data().seed?s.data().seed:1;
+      if(ns!==seed){seed=ns;order=pick(seed);sOwn=sGuess=null;init=false;ack=0;if(raw.length){init=true;ack=firstUnfinished()}}
+      render();
+    });
+    db.collection("qtm").onSnapshot(s=>{
+      raw=s.docs.map(d=>d.data());
+      if(!init){init=true;ack=firstUnfinished()}
+      render();
+    });
+    $("note").textContent="Conectado ✨ Respondan a su ritmo, el resultado se revela cuando ambos terminen cada pregunta.";
+  }catch(e){db=null;$("note").textContent="Sin conexión."}
+})();
+
+}
+function G_ttt(root){
+const $=id=>root.querySelector("#"+id),NAME={a:"Andrés",p:"Paula"},O=r=>r==="a"?"p":"a";
+let db=null,myRole="a";
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function note(t){const n=$("note");if(n)n.textContent=t}
+const ESC=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function setScore(a,p){if(!$("sa"))return;$("sa").textContent=a;$("sp").textContent=p;$("na").textContent="Andrés"+(myRole==="a"?" (tú)":"");$("np").textContent="Paula"+(myRole==="p"?" (tú)":"")}
+async function boot(){try{
+ if(!window.claude){note("Abre el enlace compartido para jugar en pareja.");return false}
+ db=await claude.use("db");const u=await claude.use("user");
+ if(!db||!u){db=null;note("Inicia sesión para jugar en pareja.");return false}
+ myRole=(await u.me()).isOwner?"a":"p";note("Conectado ✨");return true
+}catch(e){db=null;note("Sin conexión.");return false}}
+
+const M={3:{R:3,C:3,W:3,g:0},4:{R:6,C:7,W:4,g:1}};
+const fresh=(mode,first,sc)=>({mode,b:".".repeat(M[mode].R*M[mode].C),turn:first,first,sc,w:""});
+let st=fresh(3,"a",{a:0,p:0});
+const ref=()=>db.doc("ttt/state");
+function win(b,m){const{R,C,W}=M[m];const at=(r,c)=>r>=0&&r<R&&c>=0&&c<C?b[r*C+c]:"x";
+ for(let r=0;r<R;r++)for(let c=0;c<C;c++){const p=at(r,c);if(p==="."||p==="x")continue;
+  for(const[dr,dc]of[[0,1],[1,0],[1,1],[1,-1]]){let k=1;while(k<W&&at(r+dr*k,c+dc*k)===p)k++;if(k===W)return p}}
+ return b.includes(".")?"":"-"}
+function render(){
+ const{C}=M[st.mode];setScore(st.sc.a,st.sc.p);
+ const s=st.w==="-"?"🤝 ¡Empate!":st.w?"🎉 Gana "+NAME[st.w]:st.turn===myRole?"Tu turno":"Turno de "+NAME[st.turn];
+ let h='<div class="card"><div class="big">'+s+'</div><div class="bd" style="grid-template-columns:repeat('+C+',1fr)">';
+ for(let i=0;i<st.b.length;i++)h+='<button class="cl '+st.b[i]+'" data-i="'+i+'">.</button>';
+ h+='</div><div class="md" style="text-align:center"><button class="go" id="m3">Tres en raya</button><button class="go" id="m4">Conecta 4</button><button class="go" id="nw">Otra partida</button></div></div>';
+ $("main").innerHTML=h;
+ document.querySelectorAll(".cl").forEach(b=>b.onclick=()=>play(+b.dataset.i));
+ const set=n=>{if(!db)return;st=n;render();ref().set(n)};
+ $("m3").onclick=()=>set(fresh(3,O(st.first),st.sc));$("m4").onclick=()=>set(fresh(4,O(st.first),st.sc));$("nw").onclick=()=>set(fresh(st.mode,O(st.first),st.sc));
+}
+function play(i){
+ if(!db||st.w||st.turn!==myRole)return;const{R,C,g}=M[st.mode];let idx=i;
+ if(g){const c=i%C;idx=-1;for(let r=R-1;r>=0;r--)if(st.b[r*C+c]==="."){idx=r*C+c;break}}
+ if(idx<0||st.b[idx]!==".")return;
+ const nb=st.b.slice(0,idx)+myRole+st.b.slice(idx+1),w=win(nb,st.mode),sc={...st.sc};
+ if(w==="a"||w==="p")sc[w]++;
+ st={...st,b:nb,turn:O(myRole),w,sc};render();ref().set(st);
+}
+render();
+boot().then(ok=>{if(!ok)return;ref().onSnapshot(s=>{if(s.exists)st=s.data();render()})});
+
+}
+function G_mem(root){
+const $=id=>root.querySelector("#"+id),NAME={a:"Andrés",p:"Paula"},O=r=>r==="a"?"p":"a";
+let db=null,myRole="a";
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function note(t){const n=$("note");if(n)n.textContent=t}
+const ESC=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function setScore(a,p){if(!$("sa"))return;$("sa").textContent=a;$("sp").textContent=p;$("na").textContent="Andrés"+(myRole==="a"?" (tú)":"");$("np").textContent="Paula"+(myRole==="p"?" (tú)":"")}
+async function boot(){try{
+ if(!window.claude){note("Abre el enlace compartido para jugar en pareja.");return false}
+ db=await claude.use("db");const u=await claude.use("user");
+ if(!db||!u){db=null;note("Inicia sesión para jugar en pareja.");return false}
+ myRole=(await u.me()).isOwner?"a":"p";note("Conectado ✨");return true
+}catch(e){db=null;note("Sin conexión.");return false}}
+
+const EM=["🌹","💌","🌙","⭐","🍓","🎧","🦋","🍫"];
+const fresh=(seed,turn)=>({seed,up:[],own:".".repeat(16),turn});
+let st=fresh(1,"a"),dk=null;
+const ref=()=>db.doc("mem/state");
+function deck(){if(!dk||dk.s!==st.seed){const r=rng(st.seed),d=[...EM,...EM];for(let i=15;i>0;i--){const j=Math.floor(r()*(i+1));[d[i],d[j]]=[d[j],d[i]]}dk={s:st.seed,d}}return dk.d}
+function render(){
+ const d=deck(),cnt=r=>st.own.split("").filter(x=>x===r).length/2;setScore(cnt("a"),cnt("p"));
+ const over=!st.own.includes(".");
+ const s=over?(cnt("a")===cnt("p")?"🤝 ¡Empate!":"🎉 Gana "+NAME[cnt("a")>cnt("p")?"a":"p"]):st.turn===myRole?"Tu turno":"Turno de "+NAME[st.turn];
+ let h='<div class="card"><div class="big">'+s+'</div><div class="gd">';
+ for(let i=0;i<16;i++){const o=st.own[i],up=st.up.includes(i);h+='<button class="mc '+(o!=="."?o:up?"up":"")+'" data-i="'+i+'">'+(o!=="."||up?d[i]:"?")+'</button>'}
+ h+='</div><div style="text-align:center"><button class="go" id="nw">Nueva partida</button></div></div>';
+ $("main").innerHTML=h;
+ document.querySelectorAll(".mc").forEach(b=>b.onclick=()=>flip(+b.dataset.i));
+ $("nw").onclick=()=>{if(!db)return;st=fresh(Math.floor(Math.random()*1e9),O(st.turn));render();ref().set(st)};
+}
+function flip(i){
+ if(!db||st.turn!==myRole||st.own[i]!=="."||st.up.includes(i)||st.up.length>=2)return;
+ const up=[...st.up,i];st={...st,up};render();ref().set(st);
+ if(up.length===2){const d=deck(),m=d[up[0]]===d[up[1]];
+  setTimeout(()=>{const own=st.own.split("");if(m)up.forEach(j=>own[j]=myRole);st={...st,own:own.join(""),up:[],turn:m?myRole:O(myRole)};render();ref().set(st)},1100)}
+}
+render();
+boot().then(ok=>{if(!ok)return;ref().onSnapshot(s=>{if(s.exists)st=s.data();render()})});
+
+}
+function G_draw(root){
+const $=id=>root.querySelector("#"+id),NAME={a:"Andrés",p:"Paula"},O=r=>r==="a"?"p":"a";
+let db=null,myRole="a";
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function note(t){const n=$("note");if(n)n.textContent=t}
+const ESC=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function setScore(a,p){if(!$("sa"))return;$("sa").textContent=a;$("sp").textContent=p;$("na").textContent="Andrés"+(myRole==="a"?" (tú)":"");$("np").textContent="Paula"+(myRole==="p"?" (tú)":"")}
+async function boot(){try{
+ if(!window.claude){note("Abre el enlace compartido para jugar en pareja.");return false}
+ db=await claude.use("db");const u=await claude.use("user");
+ if(!db||!u){db=null;note("Inicia sesión para jugar en pareja.");return false}
+ myRole=(await u.me()).isOwner?"a":"p";note("Conectado ✨");return true
+}catch(e){db=null;note("Sin conexión.");return false}}
+
+const WORDS=["corazón","gato","casa","sol","luna","playa","pizza","avión","flor","bicicleta","estrella","paraguas","helado","guitarra","montaña","árbol","carro","pez","reloj","regalo","beso","anillo","café","mariposa"];
+let st={round:0,drawer:"a",word:WORDS[0],solved:false,clr:0,sc:{a:0,p:0}},raw=[],col="#222222",gv="",msg="",pts=null;
+const ref=()=>db.doc("draw/state"),key=()=>st.round+"_"+st.clr;
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+const COLS=["#222222","#3b82f6","#ff5c8a","#22a06b"];
+function stroke(f,c){const cx=$("cv").getContext("2d");cx.strokeStyle=c;cx.lineWidth=7;cx.lineCap="round";cx.lineJoin="round";cx.beginPath();
+ for(let i=0;i<f.length;i+=2){const x=f[i]*600,y=f[i+1]*600;i?cx.lineTo(x,y):cx.moveTo(x,y)}if(f.length===2)cx.lineTo(f[0]*600+.1,f[1]*600);cx.stroke()}
+function redraw(){const cv=$("cv");if(!cv)return;cv.getContext("2d").clearRect(0,0,600,600);raw.filter(s=>s.k===key()).forEach(s=>stroke(s.pts,s.c))}
+function render(){
+ setScore(st.sc.a,st.sc.p);const dr=st.drawer===myRole;
+ let top=dr?'Dibuja: <b>'+st.word+'</b>':'Adivina qué está dibujando <span class="'+st.drawer+'-t">'+NAME[st.drawer]+'</span>';
+ if(st.solved)top='🎉 ¡Acertó! Era <b>'+st.word+'</b>';
+ let h='<div class="card"><div class="big">'+top+'</div><canvas id="cv" width="600" height="600"></canvas>';
+ if(dr&&!st.solved)h+='<div class="cols">'+COLS.map(c=>'<span class="dot '+(c===col?"on":"")+'" data-c="'+c+'" style="background:'+c+'"></span>').join("")+'<button class="go" id="clr" style="margin:0">Borrar</button></div>';
+ if(!dr&&!st.solved)h+='<div style="margin-top:10px"><input class="ta" id="gi" placeholder="Tu respuesta…" value="'+ESC(gv)+'"><button class="go" id="gb" style="width:100%">Adivinar</button><div class="mut">'+msg+'</div></div>';
+ h+='<div style="text-align:center"><button class="go" id="nx">'+(st.solved?"Siguiente ronda":"Pasar palabra")+'</button></div></div>';
+ $("main").innerHTML=h;redraw();
+ document.querySelectorAll(".dot").forEach(d=>d.onclick=()=>{col=d.dataset.c;render()});
+ if($("clr"))$("clr").onclick=()=>{if(db){st={...st,clr:st.clr+1};render();ref().set(st)}};
+ if($("gi")){$("gi").oninput=e=>gv=e.target.value;$("gb").onclick=guess}
+ $("nx").onclick=()=>{if(!db)return;st={round:st.round+1,drawer:O(st.drawer),word:WORDS[Math.floor(Math.random()*WORDS.length)],solved:false,clr:0,sc:st.sc};gv=msg="";render();ref().set(st)};
+ const cv=$("cv");
+ if(dr&&!st.solved){
+  const P=e=>{const r=cv.getBoundingClientRect();return[Math.round((e.clientX-r.left)/r.width*1000)/1000,Math.round((e.clientY-r.top)/r.height*1000)/1000]};
+  cv.onpointerdown=e=>{e.preventDefault();cv.setPointerCapture(e.pointerId);pts=P(e)};
+  cv.onpointermove=e=>{if(!pts)return;const p=P(e),l=pts.slice(-2);pts.push(...p);stroke([...l,...p],col)};
+  cv.onpointerup=()=>{if(!pts)return;const f=pts;pts=null;if(db)db.collection("strokes").doc(Date.now()+"_"+myRole).set({k:key(),c:col,pts:f}).catch(()=>{})};
+ }
+}
+function guess(){
+ if(!db)return;if(norm(gv)===norm(st.word)){const sc={...st.sc};sc[myRole]++;st={...st,solved:true,sc};gv=msg="";render();ref().set(st)}
+ else{msg="❌ No es "+ESC(gv);gv="";render()}
+}
+render();
+boot().then(ok=>{if(!ok)return;
+ ref().onSnapshot(s=>{if(s.exists){const n=s.data(),same=n.round===st.round&&n.solved===st.solved&&n.clr===st.clr&&n.drawer===st.drawer;st=n;same?(setScore(st.sc.a,st.sc.p),redraw()):render()}else render()});
+ db.collection("strokes").onSnapshot(s=>{raw=s.docs.map(d=>d.data());redraw()});
+});
+
+}
+function G_sud(root){
+const $=id=>root.querySelector("#"+id),NAME={a:"Andrés",p:"Paula"},O=r=>r==="a"?"p":"a";
+let db=null,myRole="a";
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function note(t){const n=$("note");if(n)n.textContent=t}
+const ESC=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function setScore(a,p){if(!$("sa"))return;$("sa").textContent=a;$("sp").textContent=p;$("na").textContent="Andrés"+(myRole==="a"?" (tú)":"");$("np").textContent="Paula"+(myRole==="p"?" (tú)":"")}
+async function boot(){try{
+ if(!window.claude){note("Abre el enlace compartido para jugar en pareja.");return false}
+ db=await claude.use("db");const u=await claude.use("user");
+ if(!db||!u){db=null;note("Inicia sesión para jugar en pareja.");return false}
+ myRole=(await u.me()).isOwner?"a":"p";note("Conectado ✨");return true
+}catch(e){db=null;note("Sin conexión.");return false}}
+
+let seed=1,P=gen(1),docs={},sel=-1,msg="";
+function gen(sd){const r=rng(sd),sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+ const d=sh([1,2,3,4,5,6,7,8,9]),ord=()=>sh([0,1,2]).map(b=>b*0).length?null:null;
+ const perm=()=>{const bands=sh([0,1,2]);return bands.flatMap(b=>sh([0,1,2]).map(x=>b*3+x))};
+ const R=perm(),C=perm(),sol=[];
+ for(let i=0;i<9;i++)for(let j=0;j<9;j++){const rr=R[i],cc=C[j];sol.push(d[(3*(rr%3)+Math.floor(rr/3)+cc)%9])}
+ const rm=new Set();while(rm.size<44)rm.add(Math.floor(r()*81));
+ return{sol,rm}}
+const ref=()=>db.doc("sud/state");
+function render(){
+ let a=0,p=0;Object.values(docs).forEach(x=>x.by==="a"?a++:p++);setScore(a,p);
+ const done=Object.keys(docs).length>=P.rm.size;
+ let h='<div class="card"><div class="big">'+(done?"🎉 ¡Sudoku completado! "+(a===p?"Empate":NAME[a>p?"a":"p"]+" puso más")+"":"Resuelvan juntos, cada acierto suma")+'</div><div class="sd">';
+ for(let i=0;i<81;i++){const g=!P.rm.has(i),x=docs[i];h+='<button class="sc '+(g?"g":x?x.by:"")+(i===sel?" sel":"")+'" data-i="'+i+'">'+(g?P.sol[i]:x?x.v:"")+'</button>'}
+ h+='</div><div class="np">'+[1,2,3,4,5,6,7,8,9].map(n=>'<button data-n="'+n+'">'+n+'</button>').join("")+'</div><div class="mut">'+msg+'</div><div style="text-align:center"><button class="go" id="nw">Nuevo sudoku</button></div></div>';
+ $("main").innerHTML=h;
+ document.querySelectorAll(".sc").forEach(b=>b.onclick=()=>{sel=+b.dataset.i;msg="";render()});
+ document.querySelectorAll(".np button").forEach(b=>b.onclick=()=>put(+b.dataset.n));
+ $("nw").onclick=()=>{if(db)ref().set({seed:Math.floor(Math.random()*1e9)})};
+}
+function put(n){
+ if(!db||sel<0||!P.rm.has(sel)||docs[sel])return;
+ if(n!==P.sol[sel]){msg="❌ Ese número no va ahí";render();return}
+ const d={seed,idx:sel,v:n,by:myRole};docs[sel]=d;msg="";render();db.doc("sudc/"+seed+"_"+sel).set(d).catch(()=>{});
+}
+let raw=[];
+function recompute(){docs={};raw.forEach(x=>{if(x.seed===seed)docs[x.idx]=x});render()}
+render();
+boot().then(ok=>{if(!ok)return;
+ ref().onSnapshot(s=>{const n=s.exists&&s.data().seed?s.data().seed:1;seed=n;P=gen(n);sel=-1;recompute()});
+ db.collection("sudc").onSnapshot(s=>{raw=s.docs.map(d=>d.data());recompute()});
+});
+
+}
+function G_cart(root){
+const $=id=>root.querySelector("#"+id),NAME={a:"Andrés",p:"Paula"},O=r=>r==="a"?"p":"a";
+let db=null,myRole="a";
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function note(t){const n=$("note");if(n)n.textContent=t}
+const ESC=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function setScore(a,p){if(!$("sa"))return;$("sa").textContent=a;$("sp").textContent=p;$("na").textContent="Andrés"+(myRole==="a"?" (tú)":"");$("np").textContent="Paula"+(myRole==="p"?" (tú)":"")}
+async function boot(){try{
+ if(!window.claude){note("Abre el enlace compartido para jugar en pareja.");return false}
+ db=await claude.use("db");const u=await claude.use("user");
+ if(!db||!u){db=null;note("Inicia sesión para jugar en pareja.");return false}
+ myRole=(await u.me()).isOwner?"a":"p";note("Conectado ✨");return true
+}catch(e){db=null;note("Sin conexión.");return false}}
+
+let cartas=[];
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+function render(){
+ const keep=$("tx")?$("tx").value:"",kd=$("dt")?$("dt").value:"";
+ let h='<div class="card"><div class="big">Escribe una carta 💌</div><textarea class="ta" id="tx" rows="4" placeholder="Cuéntale algo bonito…"></textarea><div class="mut" style="padding:6px 0">Se abre el día (opcional): <input type="date" id="dt" min="'+today()+'"></div><div style="text-align:center"><button class="go" id="sd">Enviar carta</button></div></div>';
+ h+='<div class="card"><div class="big">Nuestras cartas</div>';
+ const L=[...cartas].sort((x,y)=>y.ts-x.ts);
+ if(!L.length)h+='<div class="mut">Aún no hay cartas. ¡Escribe la primera!</div>';
+ L.forEach(c=>{const lock=c.open&&c.open>today()&&c.from!==myRole;
+  h+='<div class="ct '+c.from+'"><small>'+(c.from===myRole?"Tú":NAME[c.from])+" · "+new Date(c.ts).toLocaleDateString("es")+(c.open&&c.open>today()?" · 🔒 se abre el "+c.open:"")+'</small>'+(lock?"💌 Carta sellada. Vuelve ese día para leerla.":ESC(c.text))+'</div>'});
+ $("main").innerHTML=h+'</div>';
+ $("tx").value=keep;$("dt").value=kd;
+ $("sd").onclick=async()=>{const t=$("tx").value.trim();if(!t||!db)return;
+  const ts=Date.now(),d={from:myRole,text:t,ts,open:$("dt").value||""};
+  try{await db.doc("cartas/"+ts+"_"+myRole).set(d);cartas.push(d);$("tx").value="";$("dt").value="";render()}catch(e){note("No se pudo enviar. Revisa tu permiso de Colaborador.")}};
+}
+render();
+boot().then(ok=>{if(!ok)return;db.collection("cartas").onSnapshot(s=>{cartas=s.docs.map(d=>d.data());render()})});
+
+}
+function G_preg(root){
+const $=id=>root.querySelector("#"+id),NAME={a:"Andrés",p:"Paula"},O=r=>r==="a"?"p":"a";
+let db=null,myRole="a";
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function note(t){const n=$("note");if(n)n.textContent=t}
+const ESC=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function setScore(a,p){if(!$("sa"))return;$("sa").textContent=a;$("sp").textContent=p;$("na").textContent="Andrés"+(myRole==="a"?" (tú)":"");$("np").textContent="Paula"+(myRole==="p"?" (tú)":"")}
+async function boot(){try{
+ if(!window.claude){note("Abre el enlace compartido para jugar en pareja.");return false}
+ db=await claude.use("db");const u=await claude.use("user");
+ if(!db||!u){db=null;note("Inicia sesión para jugar en pareja.");return false}
+ myRole=(await u.me()).isOwner?"a":"p";note("Conectado ✨");return true
+}catch(e){db=null;note("Sin conexión.");return false}}
+
+const Q=["¿Cuál es el recuerdo favorito que tienes de nosotros?","¿Qué es lo que más te gusta de cómo me río?","Si pudiéramos viajar mañana, ¿a dónde iríamos?","¿Qué canción te recuerda a mí?","¿Qué es algo que sueñas hacer juntos?","¿Cuándo supiste que te gustaba?","¿Qué cosa pequeña que hago te hace feliz?","¿Cómo imaginas nuestro día perfecto?","¿Qué es lo que más extrañas de estar juntos?","¿Qué te da más ilusión de nuestro futuro?","¿Qué aprendiste de mí que no esperabas?","¿Qué plan sencillo te encantaría hacer conmigo?","¿Qué te hace sentir más querido/a?","¿Qué te dio miedo al principio de nosotros?","¿Cuál ha sido nuestro momento más divertido?","¿Qué película o serie nos representa?","Dime tres cosas por las que estás agradecido/a conmigo.","¿Qué tradición nos inventarías?","¿Qué te gustaría que hiciéramos más seguido?","¿Qué frase mía no se te olvida?","¿Cuál es tu lugar favorito para estar conmigo?","¿Qué te gustaría preguntarme que nunca has preguntado?","¿Qué hábito mío te parece tierno?","¿Qué le dirías a nuestro yo de dentro de 5 años?"];
+const ord=(()=>{const r=rng(7),a=Q.map((_,i)=>i);for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a})();
+let n=0,ans={},keep="";
+const A=(k,r)=>ans[k+"_"+r];
+function render(){
+ const q=Q[ord[n%Q.length]],mine=A(n,myRole),th=A(n,O(myRole));
+ let h='<div class="card"><div class="mut">Carta '+(n+1)+'</div><div class="qq">'+q+'</div>';
+ if(mine&&th)h+=["a","p"].map(r=>'<div class="ans '+r+'"><b class="'+r+'-t">'+NAME[r]+'</b><br>'+ESC(A(n,r).text)+'</div>').join("");
+ else if(mine)h+='<div class="mut">Respuesta enviada 💌<br>Esperando a '+NAME[O(myRole)]+'…</div>';
+ else h+='<textarea class="ta" id="tx" rows="4" placeholder="Tu respuesta…">'+ESC(keep)+'</textarea><div style="text-align:center"><button class="go" id="sd">Enviar</button></div>';
+ h+='<div style="text-align:center"><button class="go" id="nx">Siguiente carta</button></div></div>';
+ $("main").innerHTML=h;
+ if($("tx"))$("tx").oninput=e=>keep=e.target.value;
+ if($("sd"))$("sd").onclick=async()=>{const t=keep.trim();if(!t||!db)return;const d={n,role:myRole,text:t};
+  try{await db.doc("pqa/"+n+"_"+myRole).set(d);ans[n+"_"+myRole]=d;keep="";render()}catch(e){note("No se pudo enviar. Revisa tu permiso de Colaborador.")}};
+ $("nx").onclick=()=>{if(db)db.doc("pqs/state").set({n:n+1})};
+}
+render();
+boot().then(ok=>{if(!ok)return;
+ db.doc("pqs/state").onSnapshot(s=>{const m=s.exists&&typeof s.data().n==="number"?s.data().n:0;if(m!==n){n=m;keep=""}render()});
+ db.collection("pqa").onSnapshot(s=>{ans={};s.docs.forEach(d=>{const x=d.data();ans[x.n+"_"+x.role]=x});render()});
+});
+
+}
+
+const started={};
+function show(id){document.getElementById("hub").hidden=!!id;document.querySelectorAll(".gm").forEach(e=>e.hidden=e.id!=="gm-"+id);
+ if(id&&!started[id]){started[id]=1;window["G_"+id](document.getElementById("gm-"+id))}window.scrollTo(0,0)}
+document.querySelectorAll(".t").forEach(b=>b.onclick=()=>show(b.dataset.g));
+document.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>show(""));
+</script></body></html>
